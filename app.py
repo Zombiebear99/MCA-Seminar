@@ -1,5 +1,5 @@
 import streamlit as st
-import tensorflow as tf
+import keras
 from PIL import Image
 import numpy as np
 import time
@@ -28,7 +28,7 @@ st.divider()
 @st.cache_resource
 def load_model():
     try:
-        model = tf.keras.models.load_model('deepfake_detector.h5')
+        model = keras.models.load_model('deepfake_detector.h5')
         return model
     except OSError:
         return None
@@ -60,7 +60,7 @@ if uploaded_file is not None:
             
             # Prepare the image exactly how the CNN expects it (128x128 pixels, scaled)
             img_resized = image.resize((128, 128))
-            img_array = tf.keras.preprocessing.image.img_to_array(img_resized)
+            img_array = np.array(img_resized.resize((128, 128)), dtype=np.float32)
             img_array = np.expand_dims(img_array, axis=0) / 255.0
             
             # The AI makes its prediction
