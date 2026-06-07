@@ -33,13 +33,13 @@ if detector_model is None:
     st.error("🚨 Error: 'deepfake_detector.onnx' not found. Please ensure your model is in the same folder as this app.")
     st.stop()
 
-st.markdown("### Step 1: Upload a Suspect Image")
+st.markdown("### Upload a Suspect Image")
 uploaded_file = st.file_uploader("Choose an image file (JPG or PNG)", type=["jpg", "jpeg", "png"])
 
 if uploaded_file is not None:
     image = Image.open(uploaded_file)
     st.image(image, caption="Uploaded Image", width=400)
-    st.markdown("### Step 2: Run AI Analysis")
+    st.markdown("### Run AI Analysis")
 
     if st.button("🔍 Analyze Pixels", type="primary"):
         with st.spinner('Scanning facial textures and lighting inconsistencies...'):
